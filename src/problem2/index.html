@@ -1,27 +1,142 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fancy Form</title>
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fancy Form</title>
+    <!-- You may add more stuff here -->
+    <link href="style.css" rel="stylesheet" />
+  </head>
 
-  <!-- You may add more stuff here -->
-  <link href="style.css" rel="stylesheet" />
-</head>
+  <body>
+    <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
+    <main class="page">
+      <form
+        class="swap-card"
+        id="swap-form"
+        autocomplete="off"
+        onsubmit="return false;"
+      >
+        <header class="swap-header">
+          <div>
+            <p class="eyebrow">Currency Swap</p>
+            <h1>Swap assets instantly</h1>
+          </div>
+          <span class="badge" id="status-badge">Live prices</span>
+        </header>
 
-<body>
+        <section class="swap-grid">
+          <div class="field-group">
+            <label for="input-amount">Amount to send</label>
+            <div class="input-shell">
+              <input
+                id="input-amount"
+                type="number"
+                min="0"
+                step="any"
+                inputmode="decimal"
+                placeholder="0.00"
+              />
+            </div>
+          </div>
 
-  <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <h5>Swap</h5>
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
+          <div class="field-group">
+            <label for="input-token-button">From</label>
+            <div class="token-picker" id="input-token-picker">
+              <button
+                type="button"
+                class="select-shell"
+                id="input-token-button"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+              >
+                <img id="input-token-icon" alt="" />
+                <span class="token-label" id="input-token-label"
+                  >Select token</span
+                >
+              </button>
+              <div
+                class="token-panel"
+                role="listbox"
+                aria-label="Select input token"
+              >
+                <input
+                  class="token-search"
+                  id="input-token-search"
+                  placeholder="Search token…"
+                />
+                <div class="token-list" id="input-token-list"></div>
+              </div>
+            </div>
+          </div>
 
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
+          <button
+            type="button"
+            class="swap-button"
+            id="swap-button"
+            aria-label="Swap tokens"
+          >
+            ⇅
+          </button>
 
-    <button>CONFIRM SWAP</button>
-  </form>
-  <script src="script.js"></script>
-</body>
+          <div class="field-group">
+            <label for="output-amount">Amount to receive</label>
+            <div class="input-shell">
+              <input
+                id="output-amount"
+                type="number"
+                min="0"
+                step="any"
+                inputmode="decimal"
+                placeholder="0.00"
+              />
+              <span class="helper">Estimated</span>
+            </div>
+          </div>
 
+          <div class="field-group">
+            <label for="output-token-button">To</label>
+            <div class="token-picker" id="output-token-picker">
+              <button
+                type="button"
+                class="select-shell"
+                id="output-token-button"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+              >
+                <img id="output-token-icon" alt="" />
+                <span class="token-label" id="output-token-label"
+                  >Select token</span
+                >
+              </button>
+              <div
+                class="token-panel"
+                role="listbox"
+                aria-label="Select output token"
+              >
+                <input
+                  class="token-search"
+                  id="output-token-search"
+                  placeholder="Search token…"
+                />
+                <div class="token-list" id="output-token-list"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="rate-row">
+          <p id="rate-text">Loading prices…</p>
+        </div>
+
+        <p class="error" id="error-text" aria-live="polite"></p>
+
+        <button class="confirm" id="confirm-button" type="submit" disabled>
+          Confirm swap
+        </button>
+      </form>
+    </main>
+    <script src="script.js"></script>
+  </body>
 </html>
