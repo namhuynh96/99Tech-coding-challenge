@@ -1,10 +1,5 @@
-# 99Tech Code Challenge #1 #
+- The problem 1 is solved in problem1/sum.js
 
-Note that if you fork this repository, your responses may be publicly linked to this repo.  
-Please submit your application along with the solutions attached or linked.   
+- The view the app of token swap in problem 2: run `npm i` then `npm run dev` to start vite
 
-It is important that you minimally attempt the problems, even if you do not arrive at a working solution.
-
-## Submission ##
-You can either provide a link to an online repository, attach the solution in your application, or whichever method you prefer.
-We're cool as long as we can view your solution without any pain.
+- I give answers for problem 3 in problem3/original_code.ts and a refactoed version in problem3/refactored.ts
