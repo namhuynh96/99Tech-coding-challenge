@@ -1,4 +1,4 @@
-import { confirmButton, errorText, rateText } from "./dom.js";
+import { confirmButton, errorText, rateText, swapForm } from "./dom.js";
 import { attachEvents } from "./events.js";
 import { fetchPrices } from "./data.js";
 import { calculate } from "./calculator.js";
@@ -8,6 +8,7 @@ import { setStatus } from "./utils.js";
 
 const init = async () => {
   setStatus("Loading prices…", false);
+  swapForm.classList.add("is-loading");
   attachEvents();
   try {
     const prices = await fetchPrices();
@@ -24,6 +25,8 @@ const init = async () => {
     errorText.textContent = "Unable to load prices. Please retry later.";
     confirmButton.disabled = true;
     rateText.textContent = "Pricing service offline";
+  } finally {
+    swapForm.classList.remove("is-loading");
   }
 };
 

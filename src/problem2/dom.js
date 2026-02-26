@@ -1,3 +1,4 @@
+export const swapForm = document.getElementById("swap-form");
 export const inputAmount = document.getElementById("input-amount");
 export const outputAmount = document.getElementById("output-amount");
 export const inputTokenPicker = document.getElementById("input-token-picker");
