@@ -12,7 +12,7 @@ import {
   swapButton,
 } from "./dom.js";
 import { setActiveField, setSelected, state } from "./state.js";
-import { sanitizeNumberInput } from "./utils.js";
+import { isAllowedNumberKey, sanitizeNumberInput } from "./utils.js";
 import { calculate } from "./calculator.js";
 import { renderTokenList, updateTokenDisplay } from "./tokenList.js";
 
@@ -23,10 +23,22 @@ export const attachEvents = () => {
     calculate();
   });
 
+  inputAmount.addEventListener("keydown", (event) => {
+    if (!isAllowedNumberKey(event)) {
+      event.preventDefault();
+    }
+  });
+
   outputAmount.addEventListener("input", () => {
     outputAmount.value = sanitizeNumberInput(outputAmount.value);
     setActiveField("output");
     calculate();
+  });
+
+  outputAmount.addEventListener("keydown", (event) => {
+    if (!isAllowedNumberKey(event)) {
+      event.preventDefault();
+    }
   });
 
   inputTokenButton.addEventListener("click", (event) => {

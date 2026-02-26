@@ -6,7 +6,7 @@ import {
   confirmButton,
 } from "./dom.js";
 import { state } from "./state.js";
-import { formatNumber, normalizeSymbol } from "./utils.js";
+import { formatNumber, formatPlainNumber, normalizeSymbol } from "./utils.js";
 
 const getPrice = (symbol) => {
   const upper = normalizeSymbol(symbol);
@@ -43,7 +43,10 @@ export const calculate = () => {
   }
 
   const rate = fromPrice / toPrice;
-  rateText.textContent = `1 ${fromSymbol} ≈ ${formatNumber(rate, 6)} ${toSymbol}`;
+  rateText.textContent = `1 ${fromSymbol} ≈ ${formatNumber(
+    rate,
+    6
+  )} ${toSymbol}`;
 
   if (state.activeField === "input") {
     if (!Number.isFinite(inputValue) || inputValue <= 0) {
@@ -52,7 +55,7 @@ export const calculate = () => {
       outputAmount.value = "";
       return;
     }
-    outputAmount.value = formatNumber(inputValue * rate, 6);
+    outputAmount.value = formatPlainNumber(inputValue * rate, 6);
   } else {
     if (!Number.isFinite(outputValue) || outputValue <= 0) {
       confirmButton.disabled = true;
@@ -60,7 +63,7 @@ export const calculate = () => {
       inputAmount.value = "";
       return;
     }
-    inputAmount.value = formatNumber(outputValue / rate, 6);
+    inputAmount.value = formatPlainNumber(outputValue / rate, 6);
   }
 
   confirmButton.disabled = false;

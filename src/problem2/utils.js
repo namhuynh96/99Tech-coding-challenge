@@ -1,19 +1,51 @@
 import { ICON_URL } from "./constants.js";
 import { statusBadge } from "./dom.js";
 
-export const formatNumber = (value, digits = 6) => {
-  if (!Number.isFinite(value)) return "0";
-  return value.toLocaleString(undefined, {
+const formatWithOptions = (value, digits, useGrouping) =>
+  value.toLocaleString(undefined, {
     minimumFractionDigits: 0,
     maximumFractionDigits: digits,
+    useGrouping,
   });
+
+export const formatNumber = (value, digits = 6) => {
+  if (!Number.isFinite(value)) return "0";
+  return formatWithOptions(value, digits, true);
+};
+
+export const formatPlainNumber = (value, digits = 6) => {
+  if (!Number.isFinite(value)) return "0";
+  return formatWithOptions(value, digits, false);
 };
 
 export const sanitizeNumberInput = (value) => {
   const cleaned = value.replace(/[^\d.]/g, "");
   const parts = cleaned.split(".");
   if (parts.length <= 1) return cleaned;
-  return `${parts[0]}.${parts.slice(1).join("")}`;
+  const [whole, ...rest] = parts;
+  return `${whole}.${rest.join("")}`;
+};
+
+export const isAllowedNumberKey = (event) => {
+  const allowedKeys = [
+    "Backspace",
+    "Delete",
+    "Tab",
+    "ArrowLeft",
+    "ArrowRight",
+    "Home",
+    "End",
+  ];
+
+  if (allowedKeys.includes(event.key) || event.ctrlKey || event.metaKey) {
+    return true;
+  }
+
+  if (event.key === ".") {
+    return !event.target.value.includes(".");
+  }
+
+  return /^[0-9]$/.test(event.key);
 };
 
 export const normalizeSymbol = (symbol) => (symbol || "").trim().toUpperCase();

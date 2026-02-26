@@ -37,10 +37,9 @@
             <div class="input-shell">
               <input
                 id="input-amount"
-                type="number"
-                min="0"
-                step="any"
+                type="text"
                 inputmode="decimal"
+                pattern="^[0-9]*\\.?[0-9]*$"
                 placeholder="0.00"
               />
             </div>
@@ -90,10 +89,9 @@
             <div class="input-shell">
               <input
                 id="output-amount"
-                type="number"
-                min="0"
-                step="any"
+                type="text"
                 inputmode="decimal"
+                pattern="^[0-9]*\\.?[0-9]*$"
                 placeholder="0.00"
               />
               <span class="helper">Estimated</span>
